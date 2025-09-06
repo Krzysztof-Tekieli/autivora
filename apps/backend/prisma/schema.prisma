@@ -1,0 +1,38 @@
+// apps/backend/prisma/schema.prisma
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Ad {
+  id                Int        @id @default(autoincrement())
+  title             String
+  description       String
+  brand             String
+  model             String
+  year              Int
+  price             BigInt
+  packageType       String
+  status            String     @default("PENDING")
+  checkoutSessionId String?
+  createdAt         DateTime   @default(now())
+  phone             String     @default("000000000")
+  expiresAt         DateTime   @default("2099-12-31T00:00:00Z")
+  images            AdImage[]  // relacja 1:N do zdjęć
+
+  @@map("ads")
+}
+
+model AdImage {
+  id     Int    @id @default(autoincrement())
+  url    String
+  adId   Int
+  ad     Ad     @relation(fields: [adId], references: [id])
+
+  @@map("ad_images")
+}

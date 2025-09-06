@@ -1,0 +1,25 @@
+# dependencies
+node_modules
+/apps/**/node_modules
+/packages/**/node_modules
+
+# next.js build
+.next
+/apps/**/.next
+/packages/**/.next
+
+# output
+dist
+build
+
+# system files
+.DS_Store
+Thumbs.db
+
+# env files
+.env
+.env.local
+.env.*.local
+
+# uploads (backend)
+apps/backend/public/uploads
