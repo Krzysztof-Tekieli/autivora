@@ -54,7 +54,10 @@ export default function Navbar() {
           href="/"
           className="flex items-center gap-2 font-extrabold text-2xl sm:text-3xl tracking-tight text-blue-600 dark:text-blue-400 hover:opacity-90 transition-opacity"
         >
-          <MdDirectionsCar className="w-7 h-7 text-blue-500 dark:text-blue-300" />
+          <MdDirectionsCar
+            className="w-7 h-7 text-blue-500 dark:text-blue-300"
+            {...({} as any)}
+          />
           <span>AutiVora</span>
         </Link>
 
@@ -78,9 +81,12 @@ export default function Navbar() {
             aria-label="Zmień tryb kolorów"
           >
             {dark ? (
-              <BsSun className="w-5 h-5 text-yellow-400" />
+              <BsSun className="w-5 h-5 text-yellow-400" {...({} as any)} />
             ) : (
-              <BsMoon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+              <BsMoon
+                className="w-5 h-5 text-gray-600 dark:text-gray-300"
+                {...({} as any)}
+              />
             )}
           </button>
 
@@ -90,7 +96,7 @@ export default function Navbar() {
               href="/profile"
               className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all font-medium"
             >
-              <MdPerson className="w-5 h-5" />
+              <MdPerson className="w-5 h-5" {...({} as any)} />
               Mój profil
             </Link>
           ) : (
@@ -98,7 +104,7 @@ export default function Navbar() {
               href="/login"
               className="flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500 text-blue-600 dark:text-blue-300 hover:bg-blue-50 dark:hover:bg-gray-800 transition-all font-medium"
             >
-              <MdPerson className="w-5 h-5" />
+              <MdPerson className="w-5 h-5" {...({} as any)} />
               Zaloguj się
             </Link>
           )}
@@ -119,7 +125,7 @@ export default function Navbar() {
           aria-label="Toggle menu"
           aria-expanded={isOpen}
         >
-          {isOpen ? <HiX size={28} /> : <HiMenu size={28} />}
+          {isOpen ? <HiX size={28} {...({} as any)} /> : <HiMenu size={28} {...({} as any)} />}
         </button>
       </div>
 

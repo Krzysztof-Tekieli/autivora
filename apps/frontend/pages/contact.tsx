@@ -1,9 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { IconType } from "react-icons";
 import { FiPhone, FiMail, FiMapPin, FiFacebook, FiInstagram, FiLinkedin } from "react-icons/fi";
 
 export default function ContactPage() {
+  const contactCards: { icon: IconType; title: string; value: string }[] = [
+    { icon: FiPhone, title: "Telefon", value: "+48 123 456 789" },
+    { icon: FiMail, title: "E-mail", value: "kontakt@autivora.pl" },
+    { icon: FiMapPin, title: "Adres", value: "ul. Luksusowa 7, Warszawa" },
+  ];
+
+  const socialIcons: { icon: IconType; href: string; colorClass?: string }[] = [
+    { icon: FiFacebook, href: "#", colorClass: "hover:text-blue-800" },
+    { icon: FiInstagram, href: "#", colorClass: "hover:text-pink-600" },
+    { icon: FiLinkedin, href: "#", colorClass: "hover:text-blue-700" },
+  ];
+
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-950">
       {/* Hero */}
@@ -21,33 +34,32 @@ export default function ContactPage() {
             Masz pytania? Chcesz dowiedzieć się więcej o AutiVora? Jesteśmy tu, aby pomóc 🚀
           </p>
         </motion.div>
-
-        {/* animowany gradient blur w tle */}
         <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-yellow-500/20 blur-3xl animate-pulse"></div>
       </section>
 
       {/* Cards */}
       <section className="max-w-6xl mx-auto px-6 -mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 relative z-20">
-        {[
-          { icon: <FiPhone className="w-8 h-8" />, title: "Telefon", value: "+48 123 456 789" },
-          { icon: <FiMail className="w-8 h-8" />, title: "E-mail", value: "kontakt@autivora.pl" },
-          { icon: <FiMapPin className="w-8 h-8" />, title: "Adres", value: "ul. Luksusowa 7, Warszawa" },
-        ].map((item, i) => (
-          <motion.div
-            key={i}
-            whileHover={{ scale: 1.05 }}
-            className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-xl text-center flex flex-col items-center gap-4 transition"
-          >
-            <div className="text-blue-600 dark:text-blue-400">{item.icon}</div>
-            <h3 className="text-lg font-semibold">{item.title}</h3>
-            <p className="text-gray-600 dark:text-gray-300">{item.value}</p>
-          </motion.div>
-        ))}
+        {contactCards.map((item, i) => {
+          const Icon = item.icon;
+          return (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-xl text-center flex flex-col items-center gap-4 transition"
+            >
+              <div className="text-blue-600 dark:text-blue-400">
+                {/* Użycie size zamiast className */}
+                <Icon size={32} />
+              </div>
+              <h3 className="text-lg font-semibold">{item.title}</h3>
+              <p className="text-gray-600 dark:text-gray-300">{item.value}</p>
+            </motion.div>
+          );
+        })}
       </section>
 
       {/* Form + Map */}
       <section className="max-w-6xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Form */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -83,7 +95,6 @@ export default function ContactPage() {
           </form>
         </motion.div>
 
-        {/* Map */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -105,9 +116,14 @@ export default function ContactPage() {
       <section className="text-center py-16 border-t dark:border-gray-800">
         <h3 className="text-lg font-semibold mb-6">Znajdziesz nas też tutaj 🌍</h3>
         <div className="flex justify-center gap-6 text-2xl text-blue-600 dark:text-blue-400">
-          <a href="#" className="hover:text-blue-800 transition"><FiFacebook /></a>
-          <a href="#" className="hover:text-pink-600 transition"><FiInstagram /></a>
-          <a href="#" className="hover:text-blue-700 transition"><FiLinkedin /></a>
+          {socialIcons.map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <a key={i} href={item.href} className={`${item.colorClass} transition`}>
+                <Icon size={32} />
+              </a>
+            );
+          })}
         </div>
       </section>
     </main>
