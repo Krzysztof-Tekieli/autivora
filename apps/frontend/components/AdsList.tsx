@@ -2,7 +2,7 @@ import React from "react";
 import AdCard, { Ad, Seller } from "./AdCard";
 
 type RawAd = {
-  id: string;
+  id: string; // przychodzi z backendu jako string
   title: string;
   description: string;
   descriptionLong?: string;
@@ -19,7 +19,7 @@ type RawAd = {
   location?: string;
   categories?: string[];
   seller?: Seller;
-  createdAt?: number; // może być opcjonalne w raw
+  createdAt?: number | string; // może przyjść jako number lub string
   status?: "active" | "archived" | "pending" | "sold";
   packageTier?: "Basic" | "Premium" | "Platyna" | "VIP";
   isNew?: boolean;
@@ -31,7 +31,7 @@ type AdsListProps = {
 };
 
 const mapRawToAd = (raw: RawAd): Ad => ({
-  id: raw.id,
+  id: Number(raw.id), // konwertujemy string na number
   title: raw.title,
   description: raw.description,
   descriptionLong: raw.descriptionLong,
@@ -48,7 +48,9 @@ const mapRawToAd = (raw: RawAd): Ad => ({
   location: raw.location,
   categories: raw.categories,
   seller: raw.seller,
-  createdAt: raw.createdAt || Date.now(), // <--- ważne, żeby TypeScript nie narzekał
+  createdAt: typeof raw.createdAt === "string"
+    ? raw.createdAt
+    : new Date(raw.createdAt || Date.now()).toISOString(), // zawsze string ISO
   status:
     raw.status === "active"
       ? "ACTIVE"
