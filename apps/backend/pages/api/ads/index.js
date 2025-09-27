@@ -47,7 +47,7 @@ export default async function handler(req, res) {
         data: {
           title,
           description,
-          price: BigInt(price), // <- BigInt
+          price: BigInt(price),
           brand,
           model,
           year: Number(year),
